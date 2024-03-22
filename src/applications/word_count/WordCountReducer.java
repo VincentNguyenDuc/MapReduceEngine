@@ -9,14 +9,8 @@ import src.map_reduce.constant.MapReduceConstants;
 import src.map_reduce.reduce.IReducer;
 import src.map_reduce.type.IKeyValue;
 
-public class WordCountReducer implements IReducer<String, Integer> {
-	private static final IReducer<String, Integer> REDUCER_INSTANCE = new WordCountReducer();;
-
-	private WordCountReducer() {}
-
-	public static IReducer<String, Integer> getWordCountingReducer() {
-		return REDUCER_INSTANCE;
-	}
+public enum WordCountReducer implements IReducer<String, Integer> {
+	INSTANCE;
 
 	@Override
 	public Map<String, Integer> reduce(final List<IKeyValue<String, Integer>> keyValuePairs) {

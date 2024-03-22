@@ -14,10 +14,10 @@ public class ConcurrentWordCount {
 	public static void main(final String[] args) {
 		try {
 			// Set mapper
-			MapperFactory.setMapper(WordCountMapper.getWordCountingMapper());
+			MapperFactory.setMapper(WordCountMapper.INSTANCE);
 
 			// Set reducer
-			ReducerFactory.setReducer(WordCountReducer.getWordCountingReducer());
+			ReducerFactory.setReducer(WordCountReducer.INSTANCE);
 			
 			// Instantiate the model
 			final IConcurrentModel<String, Integer> model = new ConcurrentModel<String, Integer>();

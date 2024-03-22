@@ -14,10 +14,10 @@ public class SequentialWordCount {
 	public static void main(final String[] args) {
 		try {
 			// Set mapper
-			MapperFactory.setMapper(WordCountMapper.getWordCountingMapper());
+			MapperFactory.setMapper(WordCountMapper.INSTANCE);
 
 			// Set reducer
-			ReducerFactory.setReducer(WordCountReducer.getWordCountingReducer());
+			ReducerFactory.setReducer(WordCountReducer.INSTANCE);
 			
 			// Instantiate the model
 			final IModel<String, Integer> model = new SequentialModel<String, Integer>();

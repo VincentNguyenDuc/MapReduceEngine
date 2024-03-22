@@ -7,6 +7,7 @@ import java.util.concurrent.BlockingQueue;
 
 import src.map_reduce.constant.MapReduceConstants;
 import src.map_reduce.mvc.model.concurrent.IConcurrentModel;
+import src.map_reduce.partitioner.PartitionerFactory;
 import src.map_reduce.reduce.ReducerFactory;
 import src.map_reduce.type.IKeyValue;
 import src.map_reduce.type.KeyValue;

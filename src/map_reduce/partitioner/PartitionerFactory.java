@@ -1,10 +1,10 @@
-package src.map_reduce.thread;
+package src.map_reduce.partitioner;
 
 import src.map_reduce.constant.MapReduceConstants;
 
 @SuppressWarnings("rawtypes")
 public class PartitionerFactory {
-    private static IPartitioner partitioner = Partitioner.getInstance();
+    private static IPartitioner partitioner = Partitioner.INSTANCE;
 
     public static IPartitioner getPartitioner() {
         return partitioner;

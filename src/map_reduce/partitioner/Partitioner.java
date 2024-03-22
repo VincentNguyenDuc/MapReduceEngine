@@ -1,17 +1,16 @@
-package src.map_reduce.thread;
+package src.map_reduce.partitioner;
 
-public class Partitioner<K, V> implements IPartitioner<String, V> {
-    private static final IPartitioner<String, Integer> PARTITIONER_INSTANCE = new Partitioner<String, Integer>();
-
-    private Partitioner() {
-    }
-
-    public static IPartitioner<String, Integer> getInstance() {
-        return PARTITIONER_INSTANCE;
-    }
+/**
+ * A simple implementation of the partitioner interface, with String key and Integer value
+ * @see src.map_reduce.partitioner.IPartitioner
+ * 
+ * This class follows the singleton pattern design.
+ */
+public enum Partitioner implements IPartitioner<String, Integer> {
+    INSTANCE;
 
     @Override
-    public int getPartition(final String key, final V value, final int numberOfPartitions) {
+    public int getPartition(final String key, final Integer value, final int numberOfPartitions) {
         final char firstCharacter = key.charAt(0);
         final int partitionNum;
         if (!Character.isLetter(firstCharacter)) {
