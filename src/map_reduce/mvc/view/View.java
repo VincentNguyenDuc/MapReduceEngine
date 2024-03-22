@@ -1,7 +1,7 @@
 package src.map_reduce.mvc.view;
 
 import java.beans.PropertyChangeEvent;
-import src.map_reduce.config.Config;
+import src.map_reduce.config.MapReduceConstants;
 
 public class View implements IView {
 
@@ -20,6 +20,6 @@ public class View implements IView {
      */
     @Override
     public String toString() {
-        return Config.VIEW;
+        return MapReduceConstants.VIEW;
     }
 }
