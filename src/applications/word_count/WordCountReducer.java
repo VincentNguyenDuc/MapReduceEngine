@@ -5,15 +5,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import src.map_reduce.config.MapReduceConstants;
+import src.map_reduce.constant.MapReduceConstants;
 import src.map_reduce.reduce.IReducer;
 import src.map_reduce.type.IKeyValue;
 
 public class WordCountReducer implements IReducer<String, Integer> {
 	private static final IReducer<String, Integer> REDUCER_INSTANCE = new WordCountReducer();;
 
-	private WordCountReducer() {
-	}
+	private WordCountReducer() {}
 
 	public static IReducer<String, Integer> getWordCountingReducer() {
 		return REDUCER_INSTANCE;

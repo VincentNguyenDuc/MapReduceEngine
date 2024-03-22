@@ -1,14 +1,12 @@
 package src.map_reduce.type;
 
-import java.io.Serializable;
-
 /**
  * A generic serializable key-value pair.
  * The key and value of an object must also be serializable.
  * 
  * @author Vincent
  */
-public class KeyValue<K extends Serializable, V extends Serializable> implements IKeyValue<K, V> {
+public class KeyValue<K, V> implements IKeyValue<K, V> {
 
 	/**
 	 * The key of the object

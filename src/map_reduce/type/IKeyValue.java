@@ -8,7 +8,7 @@ import java.io.Serializable;
  * 
  * @author Vincent Nguyen
  */
-public interface IKeyValue<K extends Serializable, V extends Serializable> extends Serializable {
+public interface IKeyValue<K, V> extends Serializable {
 	K getKey();
 	V getValue();
 	void setValue(V value);

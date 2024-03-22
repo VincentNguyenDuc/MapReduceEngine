@@ -3,7 +3,7 @@ package src.applications.word_count;
 import java.util.ArrayList;
 import java.util.List;
 
-import src.map_reduce.config.MapReduceConstants;
+import src.map_reduce.constant.MapReduceConstants;
 import src.map_reduce.map.IMapper;
 import src.map_reduce.type.IKeyValue;
 import src.map_reduce.type.KeyValue;

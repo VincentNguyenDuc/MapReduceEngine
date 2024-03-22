@@ -1,10 +1,9 @@
 package src.map_reduce.map;
 
-import java.io.Serializable;
 import java.util.List;
 
 import src.map_reduce.type.IKeyValue;
 
-public interface IMapper<K extends Serializable, V extends Serializable> {
+public interface IMapper<K, V> {
     List<IKeyValue<K, V>> map(List<String> tokens);
 }

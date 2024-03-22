@@ -1,4 +1,4 @@
-package src.map_reduce.config;
+package src.map_reduce.constant;
 
 public class MapReduceConstants {
     public static final String MODEL = "Model";
@@ -11,4 +11,6 @@ public class MapReduceConstants {
     public static final String BARRIER = "Barrier";
     public static final String PARTITIONER = "Partitioner";
     public static final String QUIT = "Quit";
+    public static final String WORKER = "Worker";
+    public static final int BUFFER_SIZE = 5;
 }
