@@ -3,14 +3,15 @@ package src.applications.word_count;
 import java.beans.PropertyChangeListener;
 
 import src.map_reduce.map.MapperFactory;
-import src.map_reduce.mvc.controller.Controller;
+import src.map_reduce.mvc.controller.ConcurrentController;
 import src.map_reduce.mvc.controller.IController;
-import src.map_reduce.mvc.model.sequential.IModel;
-import src.map_reduce.mvc.model.sequential.SequentialModel;
+import src.map_reduce.mvc.model.concurrent.ConcurrentModel;
+import src.map_reduce.mvc.model.concurrent.IConcurrentModel;
 import src.map_reduce.mvc.view.View;
+import src.map_reduce.partitioner.PartitionerFactory;
 import src.map_reduce.reduce.ReducerFactory;
 
-public class SequentialWordCount {
+public class ConcurrentWordCounter {
 	public static void main(final String[] args) {
 		try {
 			// Set mapper
@@ -18,9 +19,12 @@ public class SequentialWordCount {
 
 			// Set reducer
 			ReducerFactory.setReducer(WordCountReducer.INSTANCE);
+
+			// Set partitioner
+			PartitionerFactory.setPartitioner(WordCountPartitioner.INSTANCE);
 			
 			// Instantiate the model
-			final IModel<String, Integer> model = new SequentialModel<String, Integer>();
+			final IConcurrentModel<String, Integer> model = new ConcurrentModel<String, Integer>();
 			
 			// Instantiate the view
 			final PropertyChangeListener view = new View();
@@ -29,7 +33,7 @@ public class SequentialWordCount {
 			model.addPropertyChangeListener(view);
 			
 			// Instantiate the controller
-			final IController<String, Integer> controller = new Controller<String, Integer>(model);
+			final IController<String, Integer> controller = new ConcurrentController<String, Integer>(model);
 			controller.processInput();
 			
 			System.exit(0);

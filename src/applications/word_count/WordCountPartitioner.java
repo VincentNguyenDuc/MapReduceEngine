@@ -1,4 +1,6 @@
-package src.map_reduce.partitioner;
+package src.applications.word_count;
+
+import src.map_reduce.partitioner.IPartitioner;
 
 /**
  * A simple implementation of the partitioner interface, with String key and Integer value
@@ -6,7 +8,7 @@ package src.map_reduce.partitioner;
  * 
  * This class follows the singleton pattern design.
  */
-public enum Partitioner implements IPartitioner<String, Integer> {
+public enum WordCountPartitioner implements IPartitioner<String, Integer> {
     INSTANCE;
 
     @Override

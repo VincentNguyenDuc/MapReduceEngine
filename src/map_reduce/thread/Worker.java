@@ -12,17 +12,44 @@ import src.map_reduce.reduce.ReducerFactory;
 import src.map_reduce.type.IKeyValue;
 import src.map_reduce.type.KeyValue;
 
+/**
+ * An implementation of IWorker
+ * @see src.map_reduce.thread.IWorker
+ */
 public class Worker<K, V> implements IWorker<K, V> {
 
+	/**
+	 * The thread id associated with this worker
+	 */
     private int threadId;
+
+	/**
+	 * The concurrent model
+	 */
 	private IConcurrentModel<K, V> model;
+
+	/**
+	 * A local key-value list at the current thread
+	 */
 	private List<IKeyValue<K, V>> slaveKeyValueList = new LinkedList<IKeyValue<K, V>>();
 
+	/**
+	 * Constructor
+	 * @param threadIndex identify the current thread
+	 * @param aModel a concurrent model
+	 */
 	public Worker(final int threadIndex, final IConcurrentModel<K, V> aModel) {
 		this.threadId = threadIndex;
 		this.model = aModel;
 	}
 
+	/**
+	 * Implementation of the run() method of the Runnable interface. The method performs:
+	 * - Retrieve key-value pairs from the bounded buffer until hitting a stop pair
+	 * - Perform partial reduction within the current worker
+	 * - Re-partition reduced key-value pairs across all threads
+	 * - Perform final reduction and write back to the model
+	 */
 	@SuppressWarnings("unchecked")
     @Override
 	public void run() {
@@ -80,11 +107,17 @@ public class Worker<K, V> implements IWorker<K, V> {
 		}
 	}
 
+	/**
+	 * Notify thread waiting on this object
+	 */
     @Override
     public void workerNotify() {
         this.notify();
     }
 
+	/**
+	 * The output string have the following format: Worker{threadId}
+	 */
     @Override
     public String toString() {
         return MapReduceConstants.WORKER.concat(String.valueOf(threadId));
