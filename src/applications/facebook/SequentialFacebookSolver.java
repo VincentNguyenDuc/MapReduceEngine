@@ -1,6 +1,7 @@
-package src.applications.word_count;
+package src.applications.facebook;
 
 import java.beans.PropertyChangeListener;
+import java.util.List;
 
 import src.map_reduce.map.MapperFactory;
 import src.map_reduce.mvc.controller.Controller;
@@ -10,24 +11,16 @@ import src.map_reduce.mvc.model.sequential.SequentialModel;
 import src.map_reduce.mvc.view.View;
 import src.map_reduce.reduce.ReducerFactory;
 
-/**
- * A sequential map reduce application
- */
-public class SequentialWordCounter {
-
-	/**
-	 * The main program
-	 * @param args command-line arguments
-	 */
+public class SequentialFacebookSolver {
 	public static void main(final String[] args) {
-		// Set mapper
-		MapperFactory.setMapper(WordCountMapper.INSTANCE);
-
-		// Set reducer
-		ReducerFactory.setReducer(WordCountReducer.INSTANCE);
+		// Switch to Facebook Mapper
+		MapperFactory.setMapper(FacebookMapper.INSTANCE);
+		
+		// Switch to Facebook Reducer
+		ReducerFactory.setReducer(FacebookReducer.INSTANCE);
 		
 		// Instantiate the model
-		final IModel<String, Integer> model = new SequentialModel<String, Integer>();
+		final IModel<String, List<String>> model = new SequentialModel<String, List<String>>();
 		
 		// Instantiate the view
 		final PropertyChangeListener view = new View();
@@ -38,11 +31,9 @@ public class SequentialWordCounter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		// Instantiate the controller
-		final IController<String, Integer> controller = new Controller<String, Integer>(model);
+		final IController<String, List<String>> controller = new Controller<String, List<String>>(model);
 		controller.processInput();
-		
-		System.exit(0);
 	}
 }

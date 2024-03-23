@@ -1,6 +1,7 @@
-package src.applications.word_count;
+package src.applications.facebook;
 
 import java.beans.PropertyChangeListener;
+import java.util.List;
 
 import src.map_reduce.map.MapperFactory;
 import src.map_reduce.mvc.controller.MultithreadController;
@@ -11,27 +12,20 @@ import src.map_reduce.mvc.view.View;
 import src.map_reduce.partitioner.PartitionerFactory;
 import src.map_reduce.reduce.ReducerFactory;
 
-/**
- * A concurrent word counting application
- */
-public class ConcurrentWordCounter {
-
-	/**
-	 * The main program
-	 * @param args Command-line arguments
-	 */
+public class FacebookSolver {
 	public static void main(final String[] args) {
-		// Set mapper
-		MapperFactory.setMapper(WordCountMapper.INSTANCE);
 
-		// Set reducer
-		ReducerFactory.setReducer(WordCountReducer.INSTANCE);
+		// Switch to Facebook Mapper
+		MapperFactory.setMapper(FacebookMapper.INSTANCE);
+
+		// Switch to Facebook Reducer
+		ReducerFactory.setReducer(FacebookReducer.INSTANCE);
 
 		// Set partitioner
-		PartitionerFactory.setPartitioner(WordCountPartitioner.INSTANCE);
+		PartitionerFactory.setPartitioner(FacebookPartitioner.INSTANCE);
 		
 		// Instantiate the model
-		final IConcurrentModel<String, Integer> model = new ConcurrentModel<String, Integer>();
+		final IConcurrentModel<String, List<String>> model = new ConcurrentModel<String, List<String>>();
 		
 		// Instantiate the view
 		final PropertyChangeListener view = new View();
@@ -44,7 +38,7 @@ public class ConcurrentWordCounter {
 		}
 		
 		// Instantiate the controller
-		final IController<String, Integer> controller = new MultithreadController<String, Integer>(model);
+		final IController<String, List<String>> controller = new MultithreadController<String, List<String>>(model);
 		controller.processInput();
 		
 		System.exit(0);

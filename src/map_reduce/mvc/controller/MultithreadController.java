@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 import src.map_reduce.mvc.model.concurrent.IConcurrentModel;
 
-public class ConcurrentController<K, V> extends Controller<K, V> {
+public class MultithreadController<K, V> extends Controller<K, V> {
 
     private IConcurrentModel<K, V> concurrentModel;
 
-    public ConcurrentController(IConcurrentModel<K, V> aModel) {
+    public MultithreadController(IConcurrentModel<K, V> aModel) {
         super(aModel);
         this.concurrentModel = aModel;
     }
@@ -25,5 +25,4 @@ public class ConcurrentController<K, V> extends Controller<K, V> {
             e.printStackTrace();
         }
     }
-    
 }

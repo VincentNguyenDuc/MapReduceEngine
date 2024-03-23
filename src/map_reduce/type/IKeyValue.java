@@ -1,12 +1,14 @@
 package src.map_reduce.type;
 
+import java.io.Serializable;
+
 /**
  * Key Value interface.
  * This interface is implemented using generic typing for better flexibility
  * 
  * @author Vincent Nguyen
  */
-public interface IKeyValue<K, V> {
+public interface IKeyValue<K, V> extends Serializable {
 	/**
 	 * Return the key of the pair
 	 * @return a key with type K

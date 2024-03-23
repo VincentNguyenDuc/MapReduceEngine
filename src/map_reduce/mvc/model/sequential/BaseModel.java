@@ -12,42 +12,40 @@ public abstract class BaseModel<K, V> implements IModel<K, V> {
 	private Map<K, V> result = new HashMap<K, V>();
 	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
-    protected abstract void processInputString() throws Exception;
-
-    public abstract void terminate() throws Exception;
+    protected abstract void processInputString();
 
     @Override
-    public void setInputString(final String newInput) throws Exception {
+    public void setInputString(final String newInput) {
         this.inputString = newInput;
         this.propertyChangeSupport.firePropertyChange("InputString", null, newInput);
         this.processInputString();
     }
     
     @Override
-    public String getInputString() throws Exception {
+    public String getInputString() {
         return this.inputString;
     }
 
     @Override
-    public Map<K, V> getResult() throws Exception {
+    public Map<K, V> getResult() {
         return this.result;
     }
 
     @Override
-    public void setResult(final Map<K, V> aResult) throws Exception {
+    public void setResult(final Map<K, V> aResult) {
         this.result = aResult;
     }
 
     @Override
-    public PropertyChangeSupport getPropertyChangeSupport() throws Exception {
+    public PropertyChangeSupport getPropertyChangeSupport() {
         return this.propertyChangeSupport;
     }
 
-    public void addPropertyChangeListener(final PropertyChangeListener aListener) throws Exception {
+    public void addPropertyChangeListener(final PropertyChangeListener aListener) {
         this.propertyChangeSupport.addPropertyChangeListener(aListener);
     }
 
-    public void removePropertyChangeListener(final PropertyChangeListener aListener) throws Exception {
+    public void removePropertyChangeListener(final PropertyChangeListener aListener) {
         this.propertyChangeSupport.removePropertyChangeListener(aListener);
     }
 

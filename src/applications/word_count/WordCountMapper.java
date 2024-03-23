@@ -16,8 +16,15 @@ import src.map_reduce.type.KeyValue;
  * This class follows the singleton pattern design.
  */
 public enum WordCountMapper implements IMapper<String, Integer> {
+	/**
+	 * The singleton
+	 */
 	INSTANCE;
 
+	/**
+	 * Perform mapping from input tokens list to key-value pair:
+	 * - Map each token to a key-value pair of (token, 1)
+	 */
 	@Override
 	public List<IKeyValue<String, Integer>> map(final List<String> tokens) {
 		final List<IKeyValue<String, Integer>> outputList = new ArrayList<IKeyValue<String, Integer>>();
@@ -27,6 +34,9 @@ public enum WordCountMapper implements IMapper<String, Integer> {
 		return outputList;
 	}
 
+	/**
+	 * Output the name of the mapper as "Mapper"
+	 */
 	@Override
 	public String toString() {
 		return MapReduceConstants.MAPPER;

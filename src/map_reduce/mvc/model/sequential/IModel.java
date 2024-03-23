@@ -19,4 +19,6 @@ public interface IModel<K, V> {
     void addPropertyChangeListener(final PropertyChangeListener aListener) throws Exception;
 
     void removePropertyChangeListener(final PropertyChangeListener aListener) throws Exception;
+
+    void terminate() throws Exception;
 }
