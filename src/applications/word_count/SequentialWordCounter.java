@@ -8,7 +8,6 @@ import src.map_reduce.mvc.controller.IController;
 import src.map_reduce.mvc.model.sequential.IModel;
 import src.map_reduce.mvc.model.sequential.SequentialModel;
 import src.map_reduce.mvc.view.View;
-import src.map_reduce.partitioner.PartitionerFactory;
 import src.map_reduce.reduce.ReducerFactory;
 
 public class SequentialWordCounter {
@@ -19,9 +18,6 @@ public class SequentialWordCounter {
 
 			// Set reducer
 			ReducerFactory.setReducer(WordCountReducer.INSTANCE);
-
-			// Set partitioner
-			PartitionerFactory.setPartitioner(WordCountPartitioner.INSTANCE);
 			
 			// Instantiate the model
 			final IModel<String, Integer> model = new SequentialModel<String, Integer>();
