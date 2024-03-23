@@ -30,10 +30,11 @@ public class Controller<K, V> implements IController<K, V> {
 			if ("quit".equals(userInput)) {
 				try {
 					this.model.terminate();
+					System.out.println("Terminate");
+					break;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				break;
 			}
             try {
 				this.model.setInputString(userInput);

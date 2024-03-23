@@ -12,7 +12,7 @@ import src.map_reduce.mvc.view.View;
 import src.map_reduce.partitioner.PartitionerFactory;
 import src.map_reduce.reduce.ReducerFactory;
 
-public class ConcurrentMutualFriendSolver {
+public class FacebookSolver {
 	public static void main(final String[] args) {
 
 		// Switch to Facebook Mapper

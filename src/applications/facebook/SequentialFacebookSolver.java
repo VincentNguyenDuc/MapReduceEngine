@@ -11,7 +11,7 @@ import src.map_reduce.mvc.model.sequential.SequentialModel;
 import src.map_reduce.mvc.view.View;
 import src.map_reduce.reduce.ReducerFactory;
 
-public class SequentialMutualFriendSolver {
+public class SequentialFacebookSolver {
 	public static void main(final String[] args) {
 		// Switch to Facebook Mapper
 		MapperFactory.setMapper(FacebookMapper.INSTANCE);

@@ -1,15 +1,14 @@
-package src.applications.word_count;
+package src.map_reduce.client;
 
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Map;
 
-import src.map_reduce.client.IRemoteClient;
 import src.map_reduce.constant.MapReduceConstants;
 import src.map_reduce.reduce.ReducerFactory;
 import src.map_reduce.type.IKeyValue;
 
-public class WordCountRemoteClient<K, V> implements IRemoteClient<K, V> {
+public class RemoteClient<K, V> implements IRemoteClient<K, V> {
 
     /**
 	 *  Can be called remotely by the server runnable to which this remote client has been assigned.
