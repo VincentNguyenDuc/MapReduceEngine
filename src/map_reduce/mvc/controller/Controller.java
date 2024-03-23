@@ -28,9 +28,18 @@ public class Controller<K, V> implements IController<K, V> {
 			System.out.println("Please enter " + MapReduceConstants.QUIT + " or a line of tokens to be processed separated by spaces");
 			final String userInput = scanner.nextLine().toLowerCase();
 			if ("quit".equals(userInput)) {
+				try {
+					this.model.terminate();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				break;
 			}
-            this.model.setInputString(userInput);
+            try {
+				this.model.setInputString(userInput);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		scanner.close();
 	}

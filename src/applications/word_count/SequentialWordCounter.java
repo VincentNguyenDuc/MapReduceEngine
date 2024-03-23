@@ -10,7 +10,15 @@ import src.map_reduce.mvc.model.sequential.SequentialModel;
 import src.map_reduce.mvc.view.View;
 import src.map_reduce.reduce.ReducerFactory;
 
+/**
+ * A sequential map reduce application
+ */
 public class SequentialWordCounter {
+
+	/**
+	 * The main program
+	 * @param args command-line arguments
+	 */
 	public static void main(final String[] args) {
 		// Set mapper
 		MapperFactory.setMapper(WordCountMapper.INSTANCE);
@@ -25,7 +33,11 @@ public class SequentialWordCounter {
 		final PropertyChangeListener view = new View();
 		
 		// Make the view an observable of the model
-		model.addPropertyChangeListener(view);
+		try {
+			model.addPropertyChangeListener(view);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		// Instantiate the controller
 		final IController<String, Integer> controller = new Controller<String, Integer>(model);

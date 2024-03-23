@@ -1,6 +1,5 @@
 package src.map_reduce.thread;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
@@ -103,6 +102,10 @@ public class Worker<K, V> implements IWorker<K, V> {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 				break;
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -111,12 +114,16 @@ public class Worker<K, V> implements IWorker<K, V> {
 	 * Perform the final reduction
 	 */
 	private void fullReduction() {
-		final LinkedList<IKeyValue<K, V>> reductionQueue = this.model.getReductionQueueList().get(threadId);
-		final Map<K, V> subReducedMap = this.performReduction(reductionQueue);
-		reductionQueue.clear();
-		subReducedMap.forEach((key, value) -> {
-			reductionQueue.add(new KeyValue<K, V>(key, value));
-		});
+		try {
+			final LinkedList<IKeyValue<K, V>> reductionQueue = this.model.getReductionQueueList().get(threadId);
+			final Map<K, V> subReducedMap = this.performReduction(reductionQueue);
+			reductionQueue.clear();
+			subReducedMap.forEach((key, value) -> {
+				reductionQueue.add(new KeyValue<K, V>(key, value));
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -133,11 +140,16 @@ public class Worker<K, V> implements IWorker<K, V> {
 	@SuppressWarnings("unchecked")
 	private void partitionPartialReduction() {
 		this.partialReducedMap.forEach((key, value) -> {
-            final int reductionQueueId = PartitionerFactory.getPartitioner().getPartition(key, value, this.model.getNumThreads());
-            final LinkedList<IKeyValue<K, V>> reductionQueue = this.model.getReductionQueueList().get(reductionQueueId);
-            synchronized (reductionQueue) {
-                reductionQueue.add(new KeyValue<K, V>(key, value));
-            }
+			try {
+				final int reductionQueueId = PartitionerFactory.getPartitioner().getPartition(key, value, this.model.getNumThreads());
+				final LinkedList<IKeyValue<K, V>> reductionQueue = this.model.getReductionQueueList()
+						.get(reductionQueueId);
+				synchronized (reductionQueue) {
+					reductionQueue.add(new KeyValue<K, V>(key, value));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		});
 	}
 

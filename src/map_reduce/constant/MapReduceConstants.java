@@ -59,6 +59,11 @@ public class MapReduceConstants {
      * Name of a runnable
      */
     public static final String WORKER = "Worker";
+    
+    /**
+     * Name of a client
+     */
+    public static final String CLIENT = "Client";
 
     /**
      * Buffer size used for bounded buffer

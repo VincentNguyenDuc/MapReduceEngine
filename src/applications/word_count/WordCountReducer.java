@@ -18,8 +18,15 @@ import src.map_reduce.type.IKeyValue;
  * This class follows the singleton pattern design.
  */
 public enum WordCountReducer implements IReducer<String, Integer> {
+	/**
+	 * The singleton
+	 */
 	INSTANCE;
 
+	/**
+	 * Perform reduction on a list of key-value pair.
+	 * Return as a map
+	 */
 	@Override
 	public Map<String, Integer> reduce(final List<IKeyValue<String, Integer>> keyValuePairs) {
 		final Map<String, Integer> result = new HashMap<>();
@@ -33,6 +40,9 @@ public enum WordCountReducer implements IReducer<String, Integer> {
 		return result;
 	}
 
+	/**
+	 * Output the reducer string as "Reducer"
+	 */
 	@Override
 	public String toString() {
 		return MapReduceConstants.REDUCER;

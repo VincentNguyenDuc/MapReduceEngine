@@ -14,8 +14,6 @@ public abstract class BaseModel<K, V> implements IModel<K, V> {
 
     protected abstract void processInputString();
 
-    public abstract void terminate();
-
     @Override
     public void setInputString(final String newInput) {
         this.inputString = newInput;

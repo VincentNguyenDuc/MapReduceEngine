@@ -26,7 +26,11 @@ public class SequentialMutualFriendSolver {
 		final PropertyChangeListener view = new View();
 		
 		// Make the view an observable of the model
-		model.addPropertyChangeListener(view);
+		try {
+			model.addPropertyChangeListener(view);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		// Instantiate the controller
 		final IController<String, List<String>> controller = new Controller<String, List<String>>(model);

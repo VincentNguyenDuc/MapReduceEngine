@@ -4,7 +4,7 @@ import java.beans.PropertyChangeListener;
 import java.util.List;
 
 import src.map_reduce.map.MapperFactory;
-import src.map_reduce.mvc.controller.ConcurrentController;
+import src.map_reduce.mvc.controller.MultithreadController;
 import src.map_reduce.mvc.controller.IController;
 import src.map_reduce.mvc.model.concurrent.ConcurrentModel;
 import src.map_reduce.mvc.model.concurrent.IConcurrentModel;
@@ -31,10 +31,14 @@ public class ConcurrentMutualFriendSolver {
 		final PropertyChangeListener view = new View();
 		
 		// Make the view an observable of the model
-		model.addPropertyChangeListener(view);
+		try {
+			model.addPropertyChangeListener(view);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		// Instantiate the controller
-		final IController<String, List<String>> controller = new ConcurrentController<String, List<String>>(model);
+		final IController<String, List<String>> controller = new MultithreadController<String, List<String>>(model);
 		controller.processInput();
 		
 		System.exit(0);
