@@ -6,17 +6,17 @@ import java.util.Map;
 
 public interface IModel<K, V> {
 
-    void setInputString(final String newInput) throws Exception;
+    void setInputString(final String newInput);
     
-    String getInputString() throws Exception;
+    String getInputString();
 
-    Map<K, V> getResult() throws Exception;
+    Map<K, V> getResult();
 
-    void setResult(final Map<K, V> aResult) throws Exception;
+    void setResult(final Map<K, V> aResult);
 
-    PropertyChangeSupport getPropertyChangeSupport() throws Exception;
+    PropertyChangeSupport getPropertyChangeSupport();
 
-    void addPropertyChangeListener(final PropertyChangeListener aListener) throws Exception;
+    void addPropertyChangeListener(final PropertyChangeListener aListener);
 
-    void removePropertyChangeListener(final PropertyChangeListener aListener) throws Exception;
+    void removePropertyChangeListener(final PropertyChangeListener aListener);
 }

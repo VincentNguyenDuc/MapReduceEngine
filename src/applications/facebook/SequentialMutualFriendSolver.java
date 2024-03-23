@@ -13,28 +13,23 @@ import src.map_reduce.reduce.ReducerFactory;
 
 public class SequentialMutualFriendSolver {
 	public static void main(final String[] args) {
-		try {
-			// Switch to Facebook Mapper
-			MapperFactory.setMapper(FacebookMapper.INSTANCE);
-			
-			// Switch to Facebook Reducer
-			ReducerFactory.setReducer(FacebookReducer.INSTANCE);
-			
-			// Instantiate the model
-			final IModel<String, List<String>> model = new SequentialModel<String, List<String>>();
-			
-			// Instantiate the view
-			final PropertyChangeListener view = new View();
-			
-			// Make the view an observable of the model
-			model.addPropertyChangeListener(view);
+		// Switch to Facebook Mapper
+		MapperFactory.setMapper(FacebookMapper.INSTANCE);
+		
+		// Switch to Facebook Reducer
+		ReducerFactory.setReducer(FacebookReducer.INSTANCE);
+		
+		// Instantiate the model
+		final IModel<String, List<String>> model = new SequentialModel<String, List<String>>();
+		
+		// Instantiate the view
+		final PropertyChangeListener view = new View();
+		
+		// Make the view an observable of the model
+		model.addPropertyChangeListener(view);
 
-			// Instantiate the controller
-			final IController<String, List<String>> controller = new Controller<String, List<String>>(model);
-			controller.processInput();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// Instantiate the controller
+		final IController<String, List<String>> controller = new Controller<String, List<String>>(model);
+		controller.processInput();
 	}
 }

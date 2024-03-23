@@ -25,7 +25,7 @@ import src.map_reduce.type.KeyValue;
 public class ConcurrentModel<K, V> extends BaseModel<K, V> implements IConcurrentModel<K,V> {
 	private int numThreads;
 	private List<Thread> threads;
-	private List<IWorker<K, V>> workers;
+	protected List<IWorker<K, V>> workers;
 	private BlockingQueue<IKeyValue<K, V>> keyValueQueue = new ArrayBlockingQueue<IKeyValue<K, V>>(MapReduceConstants.BUFFER_SIZE);
 	private List<LinkedList<IKeyValue<K, V>>> reductionQueueList = new ArrayList<LinkedList<IKeyValue<K, V>>>();
 	private IJoiner joiner;
@@ -83,19 +83,14 @@ public class ConcurrentModel<K, V> extends BaseModel<K, V> implements IConcurren
      * Initialize threads-related stuff
      */
     @Override
-    public void setNumThreads(int newNumThreads) {
+    public void setNumThreads(final int newNumThreads) {
         final int oldNum = this.numThreads;
         this.numThreads = newNumThreads;
-        try {
-            this.getPropertyChangeSupport().firePropertyChange(
-                    "NumThreads",
-                    Integer.valueOf(oldNum),
-                    Integer.valueOf(newNumThreads));
-
-            this.forkThreads(newNumThreads);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.getPropertyChangeSupport().firePropertyChange(
+                "NumThreads",
+                Integer.valueOf(oldNum),
+                Integer.valueOf(newNumThreads));
+        this.forkThreads(newNumThreads);
         this.joiner = new Joiner(newNumThreads);
         this.barrier = new Barrier(newNumThreads);
     }
@@ -140,11 +135,7 @@ public class ConcurrentModel<K, V> extends BaseModel<K, V> implements IConcurren
 	 * This includes clearing the final Result, clearing the reduction queues (which should be empty).
 	 */
 	private synchronized void nextRound() {
-		try {
-            this.getResult().clear();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.getResult().clear();
 		this.reductionQueueList.forEach((queue) -> queue.clear());
 	}
 	
@@ -175,18 +166,16 @@ public class ConcurrentModel<K, V> extends BaseModel<K, V> implements IConcurren
 	 */
 	@SuppressWarnings("unchecked")
     private void produceBoundedBuffer() {
-		
-        try {
-            final List<String> tokenStrings = Arrays.asList(this.getInputString().split(" "));
-            final List<IKeyValue<K, V>> tokens = MapperFactory.getMapper().map(tokenStrings);
-            // Add tokens to Bounded Buffer
-            for (IKeyValue<K, V> token : tokens) {
+        final List<String> tokenStrings = Arrays.asList(this.getInputString().split(" "));
+        final List<IKeyValue<K, V>> tokens = MapperFactory.getMapper().map(tokenStrings);
+        // Add tokens to Bounded Buffer
+        for (IKeyValue<K, V> token : tokens) {
+            try {
                 this.keyValueQueue.put((IKeyValue<K, V>) token);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-
 	}
 	
 	/**
@@ -227,18 +216,14 @@ public class ConcurrentModel<K, V> extends BaseModel<K, V> implements IConcurren
 		}); 
 		
 		// Announce change to the result property
-		try {
-            this.getPropertyChangeSupport().firePropertyChange("Result", null, this.getResult());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.getPropertyChangeSupport().firePropertyChange("Result", null, this.getResult());
 	}
 
     /**
      * Create multiple threads from the main thread
      * @param threadsCount the number of threads to be forked
      */
-    private void forkThreads(final Integer threadsCount) {
+    protected void forkThreads(final Integer threadsCount) {
         this.threads = new ArrayList<Thread>();
         this.workers = new ArrayList<IWorker<K, V>>();
         for (int i = 0; i < threadsCount; i++) {
@@ -254,14 +239,10 @@ public class ConcurrentModel<K, V> extends BaseModel<K, V> implements IConcurren
             aThread.start();
         }
 
-        try {
-            this.getPropertyChangeSupport().firePropertyChange(
-                    "Threads",
-                    null,
-                    this.threads);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.getPropertyChangeSupport().firePropertyChange(
+                "Threads",
+                null,
+                this.threads);
     }
 
 }

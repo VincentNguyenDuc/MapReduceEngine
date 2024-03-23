@@ -14,32 +14,29 @@ import src.map_reduce.reduce.ReducerFactory;
 
 public class ConcurrentMutualFriendSolver {
 	public static void main(final String[] args) {
-		try {
-            // Switch to Facebook Mapper
-            MapperFactory.setMapper(FacebookMapper.INSTANCE);
 
-            // Switch to Facebook Reducer
-            ReducerFactory.setReducer(FacebookReducer.INSTANCE);
+		// Switch to Facebook Mapper
+		MapperFactory.setMapper(FacebookMapper.INSTANCE);
 
-			// Set partitioner
-			PartitionerFactory.setPartitioner(FacebookPartitioner.INSTANCE);
-			
-			// Instantiate the model
-			final IConcurrentModel<String, List<String>> model = new ConcurrentModel<String, List<String>>();
-			
-			// Instantiate the view
-			final PropertyChangeListener view = new View();
-			
-			// Make the view an observable of the model
-			model.addPropertyChangeListener(view);
-			
-			// Instantiate the controller
-			final IController<String, List<String>> controller = new ConcurrentController<String, List<String>>(model);
-			controller.processInput();
-			
-			System.exit(0);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// Switch to Facebook Reducer
+		ReducerFactory.setReducer(FacebookReducer.INSTANCE);
+
+		// Set partitioner
+		PartitionerFactory.setPartitioner(FacebookPartitioner.INSTANCE);
+		
+		// Instantiate the model
+		final IConcurrentModel<String, List<String>> model = new ConcurrentModel<String, List<String>>();
+		
+		// Instantiate the view
+		final PropertyChangeListener view = new View();
+		
+		// Make the view an observable of the model
+		model.addPropertyChangeListener(view);
+		
+		// Instantiate the controller
+		final IController<String, List<String>> controller = new ConcurrentController<String, List<String>>(model);
+		controller.processInput();
+		
+		System.exit(0);
 	}
 }

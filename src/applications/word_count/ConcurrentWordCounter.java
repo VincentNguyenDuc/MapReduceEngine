@@ -13,32 +13,28 @@ import src.map_reduce.reduce.ReducerFactory;
 
 public class ConcurrentWordCounter {
 	public static void main(final String[] args) {
-		try {
-			// Set mapper
-			MapperFactory.setMapper(WordCountMapper.INSTANCE);
+		// Set mapper
+		MapperFactory.setMapper(WordCountMapper.INSTANCE);
 
-			// Set reducer
-			ReducerFactory.setReducer(WordCountReducer.INSTANCE);
+		// Set reducer
+		ReducerFactory.setReducer(WordCountReducer.INSTANCE);
 
-			// Set partitioner
-			PartitionerFactory.setPartitioner(WordCountPartitioner.INSTANCE);
-			
-			// Instantiate the model
-			final IConcurrentModel<String, Integer> model = new ConcurrentModel<String, Integer>();
-			
-			// Instantiate the view
-			final PropertyChangeListener view = new View();
-			
-			// Make the view an observable of the model
-			model.addPropertyChangeListener(view);
-			
-			// Instantiate the controller
-			final IController<String, Integer> controller = new ConcurrentController<String, Integer>(model);
-			controller.processInput();
-			
-			System.exit(0);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// Set partitioner
+		PartitionerFactory.setPartitioner(WordCountPartitioner.INSTANCE);
+		
+		// Instantiate the model
+		final IConcurrentModel<String, Integer> model = new ConcurrentModel<String, Integer>();
+		
+		// Instantiate the view
+		final PropertyChangeListener view = new View();
+		
+		// Make the view an observable of the model
+		model.addPropertyChangeListener(view);
+		
+		// Instantiate the controller
+		final IController<String, Integer> controller = new ConcurrentController<String, Integer>(model);
+		controller.processInput();
+		
+		System.exit(0);
 	}
 }

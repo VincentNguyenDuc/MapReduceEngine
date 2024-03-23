@@ -11,13 +11,9 @@ public class SequentialModel<K, V> extends BaseModel<K, V> {
     @SuppressWarnings("unchecked")
     @Override
     protected void processInputString() {
-		try {
-            final List<String> tokenStrings = Arrays.asList(super.getInputString().split(" "));
-            super.setResult(ReducerFactory.getReducer().reduce(MapperFactory.getMapper().map(tokenStrings)));
-            this.getPropertyChangeSupport().firePropertyChange("Result", null, this.getResult());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        final List<String> tokenStrings = Arrays.asList(super.getInputString().split(" "));
+        super.setResult(ReducerFactory.getReducer().reduce(MapperFactory.getMapper().map(tokenStrings)));
+        this.getPropertyChangeSupport().firePropertyChange("Result", null, this.getResult());
     }
 
     @Override

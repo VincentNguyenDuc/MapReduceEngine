@@ -11,19 +11,19 @@ import src.map_reduce.type.IKeyValue;
 
 public interface IConcurrentModel<K, V> extends IModel<K, V> {
 
-    int getNumThreads() throws Exception;
+    int getNumThreads();
 
-    List<Thread> getThreads() throws Exception;
+    List<Thread> getThreads();
 
     IJoiner getJoiner();
 
     IBarrier getBarrier();
 
-    void setNumThreads(final int newNumThreads) throws Exception;
+    void setNumThreads(final int newNumThreads);
 
     List<LinkedList<IKeyValue<K, V>>> getReductionQueueList();
 
     BlockingQueue<IKeyValue<K, V>> getKeyValueQueue();
 
-    void terminate() throws Exception;
+    void terminate();
 }

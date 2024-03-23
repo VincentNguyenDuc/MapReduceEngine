@@ -19,11 +19,7 @@ public class ConcurrentController<K, V> extends Controller<K, V> {
         // Prompt for number of threads
         final int numThreads = scanner.nextInt();
         scanner.nextLine();
-        try {
-            this.concurrentModel.setNumThreads(numThreads);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.concurrentModel.setNumThreads(numThreads);
     }
     
 }
