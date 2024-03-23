@@ -1,10 +1,12 @@
 package src.map_reduce.thread;
 
-import java.io.Serializable;
-
-import src.map_reduce.client.IRemoteClient;
-
-public interface IWorker<K extends Serializable, V extends Serializable> extends Runnable {
+/**
+ * A wrapper of the Runnable interface
+ * @see Runnable
+ */
+public interface IWorker<K, V> extends Runnable {
+    /**
+     * Notify the thread currently at the front of this object's wait queue
+     */
     public void workerNotify();
-    public void setClient(IRemoteClient<K, V> aClient);
 }

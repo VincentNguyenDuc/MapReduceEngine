@@ -1,7 +1,8 @@
 package src.map_reduce.mvc.view;
 
 import java.beans.PropertyChangeEvent;
-import src.map_reduce.config.MapReduceConstants;
+
+import src.map_reduce.constant.MapReduceConstants;
 
 public class View implements IView {
 

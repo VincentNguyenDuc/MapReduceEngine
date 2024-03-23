@@ -5,19 +5,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import src.map_reduce.config.MapReduceConstants;
+import src.map_reduce.constant.MapReduceConstants;
 import src.map_reduce.reduce.IReducer;
 import src.map_reduce.type.IKeyValue;
 
-public class WordCountReducer implements IReducer<String, Integer> {
-	private static final IReducer<String, Integer> REDUCER_INSTANCE = new WordCountReducer();;
-
-	private WordCountReducer() {
-	}
-
-	public static IReducer<String, Integer> getWordCountingReducer() {
-		return REDUCER_INSTANCE;
-	}
+/**
+ * A simple implementation of the reducer interface, with String key and Integer
+ * value
+ * 
+ * @see src.map_reduce.reducer.IReducer
+ * 
+ * This class follows the singleton pattern design.
+ */
+public enum WordCountReducer implements IReducer<String, Integer> {
+	INSTANCE;
 
 	@Override
 	public Map<String, Integer> reduce(final List<IKeyValue<String, Integer>> keyValuePairs) {
