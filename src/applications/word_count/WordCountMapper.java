@@ -8,6 +8,13 @@ import src.map_reduce.map.IMapper;
 import src.map_reduce.type.IKeyValue;
 import src.map_reduce.type.KeyValue;
 
+/**
+ * A simple implementation of the mapper interface, with String key and Integer value
+ * 
+ * @see src.map_reduce.map.IMapper
+ * 
+ * This class follows the singleton pattern design.
+ */
 public enum WordCountMapper implements IMapper<String, Integer> {
 	INSTANCE;
 

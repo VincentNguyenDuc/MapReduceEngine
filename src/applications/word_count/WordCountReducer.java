@@ -9,6 +9,14 @@ import src.map_reduce.constant.MapReduceConstants;
 import src.map_reduce.reduce.IReducer;
 import src.map_reduce.type.IKeyValue;
 
+/**
+ * A simple implementation of the reducer interface, with String key and Integer
+ * value
+ * 
+ * @see src.map_reduce.reducer.IReducer
+ * 
+ * This class follows the singleton pattern design.
+ */
 public enum WordCountReducer implements IReducer<String, Integer> {
 	INSTANCE;
 
